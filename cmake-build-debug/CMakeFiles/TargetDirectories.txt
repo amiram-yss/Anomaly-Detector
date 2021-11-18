@@ -1,0 +1,3 @@
+/home/amiram/Desktop/Advanced Programming/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/amiram/Desktop/Advanced Programming/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/amiram/Desktop/Advanced Programming/cmake-build-debug/CMakeFiles/Advanced_Programming.dir
