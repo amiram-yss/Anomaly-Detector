@@ -6,6 +6,9 @@
 using namespace std;
 
 class TimeSeries{
+float** array;
+int colloms;
+int rows;
 
 public:
 
