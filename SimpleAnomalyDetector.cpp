@@ -17,5 +17,6 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
 	// TODO Auto-generated destructor stub
+	throw;
 }
 

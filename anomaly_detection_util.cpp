@@ -99,8 +99,8 @@ float pearson(float *x, float *y, int size) {
 Line linear_reg(Point **points, int size) {
     float a, b, covXY, varX, meanX, meanY;
 
-    float arrayX[size];
-    float arrayY[size];
+    float *arrayX = new float[size];
+    float *arrayY = new float[size];
 
     for (int i = 0; i < size; ++i) {
 
