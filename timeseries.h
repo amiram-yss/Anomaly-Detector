@@ -10,7 +10,6 @@ class TimeSeries{
 public:
 
 	TimeSeries(const char* CSVfileName){
-		cout << "DIE";
 	}
 
 };
