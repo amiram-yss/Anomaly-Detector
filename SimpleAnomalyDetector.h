@@ -31,6 +31,7 @@ public:
 		return cf;
 	}
 
+    correlatedFeatures collideTwoFeatures(const TimeSeries &ts, int i, int j);
 };
 
 

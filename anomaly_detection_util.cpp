@@ -148,4 +148,20 @@ float dev(Point p, Line l) {
 };
 
 
+float maxDev (Point **points, int numOfPoints, Line l){
+
+    float theDev = 0;
+    float maxDev = 0;
+
+    for (int i = 0; i < numOfPoints; ++i) {
+        theDev = dev(*points[i], l);
+        if (theDev > maxDev) {
+            maxDev = theDev;
+        }
+    }
+}
+
+
+
+
 

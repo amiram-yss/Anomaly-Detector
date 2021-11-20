@@ -69,6 +69,10 @@ int main(){
 	//	B-D: y=a2*x+b2
 
 	generateTrainCSV(a1,b1,a2,b2);
+
+
+
+
 	TimeSeries ts("trainFile1.csv");
 	SimpleAnomalyDetector ad;
 	ad.learnNormal(ts);
