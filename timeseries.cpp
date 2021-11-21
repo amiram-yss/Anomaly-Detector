@@ -18,28 +18,35 @@ void TimeSeries::initDataset(vector<string>& raw_lines)
 
 int TimeSeries::getColumnsNum() const
 {
-	return 0;
+	return this->records_count;
 }
 
 int TimeSeries::getRowsNum() const
 {
-	return 0;
+	return this->features_count;
 }
 
-float* TimeSeries::getFeatureArray(int)
+float* TimeSeries::getFeatureArray(int index)
 {
-	return nullptr;
+	return feature_guided_dataset[index];
 }
 
-float* TimeSeries::getFeatureArray(string)
+float* TimeSeries::getFeatureArray(string feature)
 {
-	return nullptr;
+	return feature_guided_dataset[criterion_index_map[feature]];
 }
 
-string TimeSeries::getFeatureName(int)
+//TODO: Upgradeable: Try avoiding loop by adding a reverse map.
+string TimeSeries::getFeatureName(int i)
 {
-	return string();
+	for each (auto var in criterion_index_map)
+	{
+		if (var.second == i)
+			return var.first;
+	}
+	return "NOT FOUND";
 }
+
 
 vector<string>& TimeSeries::GetCSVrawDataLines(const char* CSVfileName) {
 	vector<string>* vtr = new vector<string>();
