@@ -1,106 +1,122 @@
+/*
+ * SimpleAnomalyDetector.cpp
+ *
+ * Author: 314970054 Ariel Barmats &
+ *         314985474 Amiram Yasif
+ */
 
 #include "SimpleAnomalyDetector.h"
 
-#define eliminatesFalseAlarms 1.2; //c'mon!!!!!!!!!!!!!!!
-#define brink 0.9; //only pearsons above it will consider
+#define ELIMINATES_FALSE_ALARMS 1.2f
+#define BRINK 0.9f //only pearsons above it will consider
+#define HYPHEN "-"
 
-SimpleAnomalyDetector::SimpleAnomalyDetector() {
-    // TODO Auto-generated constructor stub
 
-}
+SimpleAnomalyDetector::SimpleAnomalyDetector() {}
 
 SimpleAnomalyDetector::~SimpleAnomalyDetector() {
-    // TODO Auto-generated destructor stub
+
 }
 
-
+/************************************************************************
+ *
+ * @param ts - the "TimeSeries"
+ * The function learns the DATA and arranges in the class' vector
+ * all the correlations that exist between all 2 Features.
+ **********************************************************************/
 void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
-    // TODO Auto-generated destructor stub
 
     int columns = ts.getColumnsNum();
     int rows = ts.getRowsNum();
-    int m = 0;
-    int c = -1;
+    int c;
+    float m;
     float p;  //pearson
 
+    //All column pairs
+    for (int i = 0; i < columns; ++i) {
+        for (int j = i + 1; j < columns; ++j) {
+            m = 0;
+            c = -1;
 
-    for (int i = 0; i < rows; ++i) {
-        for (int j = i + 1; j < rows; ++j) {
+            float *a = ts.getFeatureArray(i);
+            float *b = ts.getFeatureArray(j);
 
-            p = fabsf(pearson(ts.getFeatureArray(i), ts.getFeatureArray(j)));
+            p = fabsf(pearson(a, b, rows));
             if (p > m) {
                 m = p;
                 c = j;
             }
-        }
-        if (c != -1 && m >= brink) {
-            auto it = this->cf.insert(this->cf.begin(), collideTwoFeatures(ts, i, c));
+
+            //If there is a correlation and it is also greater than the brink
+            if (c != -1 && m >= BRINK) {
+
+                correlatedFeatures s = collideTwoFeatures(ts, i, c);
+                this->cf.push_back(s);
+            }
         }
     }
-
-
 }
 
+/************************************************
+ *
+ * @param ts - the "TimeSeries"
+ * @param i - index of feature 1
+ * @param j - index of feature 2
+ * @return Boot and construction 'correlatedFeatures'
+ * struct of the 2 features
+ ************************************************/
 correlatedFeatures SimpleAnomalyDetector::collideTwoFeatures(const TimeSeries &ts, int i, int j) {
     correlatedFeatures theStruct;
-    theStruct.corrlation = pearson(ts.getFeatureArray(i), ts.getFeatureArray(j));
+    theStruct.corrlation = pearson(ts.getFeatureArray(i), ts.getFeatureArray(j), ts.getRowsNum());
     theStruct.feature1 = ts.getFeatureName(i);
     theStruct.feature2 = ts.getFeatureName(j);
 
     Point *ps[ts.getRowsNum()];
-    for (int k = 0; k < ts.getRowsNum(); i++) {
-        ps[i] = new Point(ts.getFeatureArray(i)[k], ts.getFeatureArray(j)[k]);
+    for (int k = 0; k < ts.getRowsNum(); k++) {
+        float x = ts.getFeatureArray(i)[k];
+        float y = ts.getFeatureArray(j)[k];
+
+        ps[k] = new Point(x, y);
     }
 
     theStruct.lin_reg = linear_reg(ps, ts.getRowsNum());
 
-    float maxDev = maxDev(ps, ts.getRowsNum(), theStruct.lin_reg)
+    float theMaxDev = maxDev(ps, ts.getRowsNum(), theStruct.lin_reg);
 
-//    float theDev = 0;
-//    //float maxDev = 0;
-//
-//    for (int k = 0; k < ts.getRowsNum(); ++k) {
-//        theDev = dev(ps[k], theStruct.lin_reg);
-//        if (theDev > maxDev) {
-//            maxDev = theDev;
-//        }
-//    }
-
-
-    theStruct.threshold = maxDev * eliminatesFalseAlarms;
+    theStruct.threshold = theMaxDev * ELIMINATES_FALSE_ALARMS;
 
     return theStruct;
 }
 
-
+/**********************************************
+ *
+ * @param ts - the "TimeSeries"
+ * @return vector<AnomalyReport> that
+ * contains all the AnomalyReport of
+ * the new TimeSeries
+ ********************************************/
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
 
     vector<AnomalyReport> vec;
     int rows = ts.getRowsNum();
-    int columns = ts.getColumnsNum();
-    Point point;
+    Point point(0, 0);
 
-    for (int i = 0; i < rows; ++i) { //all the rows
+    //all the rows
+    for (int i = 0; i < rows; ++i) {
 
-        for (int j = 0; j < this->cf.size(); ++j) {
-            correlatedFeatures currFeatures = this->cf[j];
-            point.x = getFeatureArray(currFeatures.feature1)[i];
-            point.y = getFeatureArray(currFeatures.feature2)[i];
-            float dev = dev(point, currFeatures.lin_reg);
+        //all the correlatedFeatures
+        for (auto currFeatures: this->cf) {
+            point.x = ts.getFeatureArray(currFeatures.feature1)[i];
+            point.y = ts.getFeatureArray(currFeatures.feature2)[i];
+            float theDev = dev(point, currFeatures.lin_reg);
 
-            if (dev > currFeatures.threshold) {
-                AnomalyReport a = AnomalyReport::AnomalyReport
-                        (currFeatures.feature1[i] + "-" + currFeatures.feature2[i], (long) i);
+            if (theDev > currFeatures.threshold) {
 
-                auto it = vec.insert(vec.begin(), a);
-
+                vec.push_back(AnomalyReport(
+                        currFeatures.feature1 + HYPHEN + currFeatures.feature2, i + 1));
             }
         }
-
-
-
-        // TODO Auto-generated destructor stub
     }
     return vec;
-
 }
+

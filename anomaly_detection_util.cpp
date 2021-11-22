@@ -145,10 +145,10 @@ float dev(Point p, Point **points, int size) {
 float dev(Point p, Line l) {
     float dev = fabsf(l.f(p.x) - p.y);
     return dev;
-};
+}
 
 
-float maxDev (Point **points, int numOfPoints, Line l){
+float maxDev(Point **points, int numOfPoints, Line l) {
 
     float theDev = 0;
     float maxDev = 0;
@@ -159,6 +159,7 @@ float maxDev (Point **points, int numOfPoints, Line l){
             maxDev = theDev;
         }
     }
+    return maxDev;
 }
 
 

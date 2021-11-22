@@ -201,30 +201,6 @@ anomaly_detection_util.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Advanced_Programming.dir/build.make CMakeFiles/Advanced_Programming.dir/anomaly_detection_util.cpp.s
 .PHONY : anomaly_detection_util.cpp.s
 
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Advanced_Programming.dir/build.make CMakeFiles/Advanced_Programming.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Advanced_Programming.dir/build.make CMakeFiles/Advanced_Programming.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Advanced_Programming.dir/build.make CMakeFiles/Advanced_Programming.dir/main.cpp.s
-.PHONY : main.cpp.s
-
 timeseries.o: timeseries.cpp.o
 .PHONY : timeseries.o
 
@@ -267,9 +243,6 @@ help:
 	@echo "... anomaly_detection_util.o"
 	@echo "... anomaly_detection_util.i"
 	@echo "... anomaly_detection_util.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 	@echo "... timeseries.o"
 	@echo "... timeseries.i"
 	@echo "... timeseries.s"
