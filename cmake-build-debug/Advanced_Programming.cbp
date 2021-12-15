@@ -100,6 +100,12 @@
 		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/anomaly_detection_util.h">
 			<Option target="Advanced_Programming"/>
 		</Unit>
+		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/minCircle.cpp">
+			<Option target="Advanced_Programming"/>
+		</Unit>
+		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/minCircle.h">
+			<Option target="Advanced_Programming"/>
+		</Unit>
 		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/timeseries.cpp">
 			<Option target="Advanced_Programming"/>
 		</Unit>

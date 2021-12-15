@@ -3,7 +3,7 @@
 #define MINCIRCLE_H_
 
 #include <iostream>
-#include <vector>
+//#include <vector>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include "anomaly_detection_util.h"
