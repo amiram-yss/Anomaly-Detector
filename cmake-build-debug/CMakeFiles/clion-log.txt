@@ -1,4 +1,4 @@
-/home/arielbarmats/clion-2021.2.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/gmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/arielbarmats/CLionProjects/Advanced-Programming-1
+/snap/clion/175/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/amiram/Desktop/AP
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/arielbarmats/CLionProjects/Advanced-Programming-1/cmake-build-debug
+-- Build files have been written to: /home/amiram/Desktop/AP/cmake-build-debug
