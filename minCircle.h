@@ -1,6 +1,14 @@
+/*
+ * miniCircle.h
+ *
+ * Author: 314970054 Ariel Barmats &
+ *         314985474 Amiram Yassif
+ */
 
 #ifndef MINCIRCLE_H_
 #define MINCIRCLE_H_
+
+#define     MAX_RELEVANT_POINTS_NUMBER  3
 
 #include <iostream>
 //#include <vector>

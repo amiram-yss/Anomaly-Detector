@@ -1,20 +1,14 @@
+/*
+ * miniCircle.cpp
+ *
+ * Author: 314970054 Ariel Barmats &
+ *         314985474 Amiram Yassif
+ */
+
 #include "minCircle.h"
 #include <vector>
 #include <cmath>
 using namespace std;
-
-Circle welzl(const vector<Point>& P);
-
-Circle findMinCircle(Point** points,size_t size){
-
-    vector<Point> v = vector<Point>();
-    for (int i = 0; i < size; ++i) {
-        Point p = *points[i];
-        v.push_back(p);
-    }
-
-    return welzl(v);
-}
 
 /**
  * Gets 2 points and calculates the distance between them.
@@ -69,13 +63,16 @@ Point get_circle_center
 Circle circle_from
     (const Point& p1, const Point& p2, const Point& p3)
 {
+    // Normalize circle so p1 is set to (0,0), so the center algo can work.
     Point ctr = get_circle_center
             (p2.x - p1.x,
              p2.y - p1.y,
              p3.x - p1.x,
              p3.y - p1.y);
+    // Un-normalize the circle, return it to where it was.
     ctr.x += p1.x;
     ctr.y += p1.y;
+    // return the circle.
     return {ctr, distance(ctr, p1) };
 }
 
@@ -88,6 +85,7 @@ Circle circle_from
  */
 Circle circle_from(const Point& p1, const Point& p2)
 {
+    // Diameter = distance to p1 to p2, and center exactly between both.
     return {
             Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2 ),
             distance(p1, p2) / 2
@@ -103,9 +101,11 @@ Circle circle_from(const Point& p1, const Point& p2)
 bool is_valid_circle(const Circle& c,
                      const vector<Point>& P)
 {
+    // Checks if there is a point that isn't inside the circle.
     for (const Point& p : P)
         if (!is_pt_in_circ(c, p))
             return false;
+    // If not found one, ret true.
     return true;
 }
 
@@ -116,63 +116,82 @@ bool is_valid_circle(const Circle& c,
  */
 Circle min_circle_simple(vector<Point>& relevant_pts)
 {
-    if (relevant_pts.empty()) {
+    short pts_num = (short)relevant_pts.size();
+    // If no points intended, return default circle.
+    if (pts_num == 0) {
         return { { 0, 0 }, 0 };
     }
-    else if (relevant_pts.size() == 1) {
+    // If one, return 0 sized circle around the point.
+    else if (pts_num == 1) {
         return {relevant_pts[0], 0 };
     }
-    else if (relevant_pts.size() == 2) {
+    // If 2, the smallest circle will be the one with 2 points on the diameter.
+    else if (pts_num == 2) {
         return circle_from(relevant_pts[0], relevant_pts[1]);
     }
-
-    // To check if MEC can be determined
-    // by 2 points only
-    for (int i = 0; i < 3; i++) {
-        for (int j = i + 1; j < 3; j++) {
-
+    // If there are 3 points, the smallest circle could have 2 or 3 points
+    // on the circle. Check each option for circle with 2 points on it.
+    for (int i = 0; i < MAX_RELEVANT_POINTS_NUMBER; i++) {
+        for (int j = i + 1; j < MAX_RELEVANT_POINTS_NUMBER; j++) {
             Circle c = circle_from(relevant_pts[i], relevant_pts[j]);
             if (is_valid_circle(c, relevant_pts))
                 return c;
         }
     }
+    // If not found good option, choose the worst (=biggest) one, 3 point on
+    // the circle.
     return circle_from(relevant_pts[0], relevant_pts[1], relevant_pts[2]);
 }
 
-// Returns the MEC using Welzl's algorithm
-// Takes a set of input points P and a set R
-// points on the circle boundary.
-// n represents the number of points in P
-// that are not yet processed.
-Circle welzl_helper(vector<Point>& P,
-                    vector<Point> R, int n)
+/**
+ * Recursive method to return Minimum Enclosing Circle (MEC),
+ * according to Welzl's algorithm.
+ * @param pts_set       set of all points.
+ * @param rlvnt_set     the relevant points in the circle (we need to compare
+ *                      only to them).
+ * @param n             number of points in point set that were not processed.
+ * @return              MEC for the dataset pts_set.
+ */
+Circle min_circ_recursive_helper(vector<Point>& pts_set, vector<Point> rlvnt_set, int n)
 {
-    // Base case when all points processed or |R| = 3
-    if (n == 0 || R.size() == 3) {
-        return min_circle_simple(R);
+    // If all points are done, or there is no room for another relevant point,
+    // so there is no way to keep going down the recursion, return min circle.
+    if (n == 0 || rlvnt_set.size() == MAX_RELEVANT_POINTS_NUMBER) {
+        return min_circle_simple(rlvnt_set);
     }
-
-    // pick point from the end of P
-    Point p = P[n-1];
-
-    // Get the MEC circle d from the
-    // set of points P - {p}
-    Circle d = welzl_helper(P, R, n - 1);
-
-    // If d contains p, return d
-    if (is_pt_in_circ(d, p)) {
-        return d;
+    // pick next point for process.
+    Point p = pts_set[n - 1];
+    // Go down the recursion, and see if the point is included
+    // in the minimum circle without the current point.
+    Circle c = min_circ_recursive_helper(pts_set, rlvnt_set, n - 1);
+    // If the point is inside the circle, it has no effect on it,
+    // return the circle without considering it.
+    if (is_pt_in_circ(c, p)) {
+        return c;
     }
-
-    // Otherwise, must be on the boundary of the MEC
-    R.push_back(p);
-
-    // Return the MEC for P - {p} and R U {p}
-    return welzl_helper(P, R, n - 1);
+    // Otherwise, we should consider the current point. It must be on the
+    // edge of the circle. We will add it in to the "relevant" set, and check
+    // what is the min circle with this point considered.
+    rlvnt_set.push_back(p);
+    return min_circ_recursive_helper(pts_set, rlvnt_set, n - 1);
 }
 
-Circle welzl(const vector<Point>& P)
-{
-    vector<Point> P_copy = P;
-    return welzl_helper(P_copy, {}, P_copy.size());
+/**
+ * Returns the Minimum Enclosing Circle for given dataset, using Welzl's algo.
+ * @param points    dataset of points.
+ * @param size      size of dataset.
+ * @return          The MEC for the dataset.
+ */
+Circle findMinCircle(Point** points,size_t size){
+    //Copy array to vector.
+    vector<Point> v = vector<Point>();
+    for (int i = 0; i < size; ++i) {
+        Point p = *points[i];
+        v.push_back(p);
+    }
+    // Copy the vector, avoid destroying it.
+    auto pts_set_cpy = v;
+    //activate recursive helper method.
+    return min_circ_recursive_helper(pts_set_cpy, {}, pts_set_cpy.size());
 }
+
