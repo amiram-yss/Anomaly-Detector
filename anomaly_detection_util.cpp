@@ -8,6 +8,9 @@
 #include <math.h>
 #include <stdlib.h>
 #include "anomaly_detection_util.h"
+#include "minCircle.h"
+#include "SimpleAnomalyDetector.h"
+
 
 /***********************************************************
  *
@@ -163,6 +166,9 @@ float maxDev(Point **points, int numOfPoints, Line l) {
 }
 
 
-
+float dev(Point p1, Point p2) {
+    float dev = sqrt( pow(p1.x - p2.x,2) + pow(p1.y - p2.y,2) );
+    return dev;
+}
 
 

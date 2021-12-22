@@ -7,10 +7,6 @@
 
 #include "SimpleAnomalyDetector.h"
 
-#define ELIMINATES_FALSE_ALARMS 1.2f
-#define BRINK 0.9f //only pearsons above it will consider
-#define HYPHEN "-"
-
 
 SimpleAnomalyDetector::SimpleAnomalyDetector() {}
 
@@ -46,7 +42,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
             }
 
             //If there is a correlation and it is also greater than the brink
-            if (c != -1 && m >= BRINK) {
+            if (c != -1 && m >= MIN_BRINK) {
 
                 correlatedFeatures s = collideTwoFeatures(ts, i, c);
                 this->cf.push_back(s);
@@ -77,22 +73,35 @@ correlatedFeatures SimpleAnomalyDetector::collideTwoFeatures(const TimeSeries &t
         ps[k] = new Point(x, y);
     }
 
-    theStruct.lin_reg = linear_reg(ps, ts.getRowsNum());
+    return curr_with_reg_Shape(theStruct, ts.getRowsNum(), ps);
+}
 
-    float theMaxDev = maxDev(ps, ts.getRowsNum(), theStruct.lin_reg);
 
+/******************************************************************
+ *
+ * @param theStruct - correlatedFeatures
+ * @param rows - num of rows in the columns
+ * @param ps - the array of points
+ * @return theStruct of correlatedFeatures after
+ *          inserting the correlative line and
+ *          the corresponding threshold
+ *****************************************************************/
+correlatedFeatures SimpleAnomalyDetector::curr_with_reg_Shape(struct correlatedFeatures &theStruct,
+                                                              int rows, Point **ps) {
+
+    theStruct.lin_reg = linear_reg(ps, rows);
+    float theMaxDev = maxDev(ps, rows, theStruct.lin_reg);
     theStruct.threshold = theMaxDev * ELIMINATES_FALSE_ALARMS;
-
     return theStruct;
 }
 
-/**********************************************
+
+/***************************************************************************
  *
  * @param ts - the "TimeSeries"
- * @return vector<AnomalyReport> that
- * contains all the AnomalyReport of
- * the new TimeSeries
- ********************************************/
+ * @return vector<AnomalyReport> that contains all the AnomalyReport
+ *                               of the new TimeSeries
+ *************************************************************************/
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
 
     vector<AnomalyReport> vec;
@@ -106,7 +115,8 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
         for (auto currFeatures: this->cf) {
             point.x = ts.getFeatureArray(currFeatures.feature1)[i];
             point.y = ts.getFeatureArray(currFeatures.feature2)[i];
-            float theDev = dev(point, currFeatures.lin_reg);
+
+            float theDev = superDev(point, currFeatures);
 
             if (theDev > currFeatures.threshold) {
 
@@ -118,3 +128,14 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
     return vec;
 }
 
+/****************************************************
+ *
+ * @param p1 - point
+ * @param c - correlatedFeatures
+ * @return the dev between the point and the
+ *         linear reg of the correlatedFeatures
+ ****************************************************/
+float SimpleAnomalyDetector::superDev(Point p1, correlatedFeatures c) {
+
+    return dev(p1, c.lin_reg);
+}

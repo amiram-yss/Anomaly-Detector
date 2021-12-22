@@ -39,6 +39,8 @@ public:
     float x, y;
 
     Point(float x, float y) : x(x), y(y) {}
+
+    Point() : x(0), y(0) {} // I did it!
 };
 
 // performs a linear regression and returns the line equation
@@ -49,6 +51,9 @@ float dev(Point p, Point **points, int size);
 
 // returns the deviation between point p and the line
 float dev(Point p, Line l);
+
+// returns the deviation between two points
+float dev(Point p1, Point p2);
 
 float maxDev(Point **points, int numOfPoints, Line l);
 

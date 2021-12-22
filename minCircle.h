@@ -23,9 +23,9 @@ using namespace std;
 
 class Circle{
 public:
-	Point center;
-	float radius;
-	Circle(Point c,float r):center(c),radius(r){}
+    Point center;
+    float radius;
+    Circle(Point c,float r):center(c),radius(r){}
 };
 // --------------------------------------
 

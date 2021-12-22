@@ -8,6 +8,7 @@
 #include "minCircle.h"
 #include <vector>
 #include <cmath>
+
 using namespace std;
 
 /**
@@ -16,19 +17,20 @@ using namespace std;
  * @param p2    point
  * @return      distance [square root of |x1-x2|^2 to |y1-y2|^2]
  */
-float distance(const Point &p1, const Point &p2)
-{
-    return sqrt(pow(p1.x-p2.x,2) + pow(p1.y-p2.y,2));
+float distance(const Point &p1, const Point &p2) {
+    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 }
 
 /**
  * Is the point inside the given circle?
  * @param c     circle
  * @param p     point
- * @return      true if point is inside the circle, false otherwise.
+ * @return      true if circle surround the point
+ *              and false if the point is outside of it.
  */
-bool is_pt_in_circ (const Circle &c, const Point &p){
-    //If the distance is smaller than the radius, the point is inside the circ.
+bool is_pt_in_circ(const Circle &c, const Point &p) {
+    //point is inside the circle if the distance
+    // between the center and the point is smaller than the radius.
     return distance(c.center, p) <= c.radius;
 }
 
@@ -44,13 +46,12 @@ bool is_pt_in_circ (const Circle &c, const Point &p){
  * @return      Center of circle.
  */
 Point get_circle_center
-    (const float &p2x, const float &p2y, const float &p3x, const float &p3y)
-{
+        (const float &p2x, const float &p2y, const float &p3x, const float &p3y) {
     float p2dist = p2x * p2x + p2y * p2y;
     float p3dist = p3x * p3x + p3y * p3y;
     float delta = p2x * p3y - p2y * p3x;
     return {(p3y * p2dist - p2y * p3dist) / (2 * delta),
-            (p2x * p3dist - p3x * p2dist) / (2 * delta) };
+            (p2x * p3dist - p3x * p2dist) / (2 * delta)};
 }
 
 /**
@@ -61,8 +62,7 @@ Point get_circle_center
  * @return      Circle that has 3 points on it.
  */
 Circle circle_from
-    (const Point& p1, const Point& p2, const Point& p3)
-{
+        (const Point &p1, const Point &p2, const Point &p3) {
     // Normalize circle so p1 is set to (0,0), so the center algo can work.
     Point ctr = get_circle_center
             (p2.x - p1.x,
@@ -73,23 +73,23 @@ Circle circle_from
     ctr.x += p1.x;
     ctr.y += p1.y;
     // return the circle.
-    return {ctr, distance(ctr, p1) };
+    return {ctr, distance(ctr, p1)};
 }
 
 /**
  * Creates a circle that p1 and p2 are one of his diameters,
  * and the center sits in the middle of the 2.
- * @param p1    point
- * @param p2    point
+ * @param p1    point one
+ * @param p2    point two
  * @return      Smallest circle including the 2 points.
  */
-Circle circle_from(const Point& p1, const Point& p2)
-{
+Circle circle_from(const Point &p1, const Point &p2) {
     // Diameter = distance to p1 to p2, and center exactly between both.
-    return {
-            Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2 ),
-            distance(p1, p2) / 2
-    };
+    float x = (p1.x + p2.x) / 2;
+    float y = (p1.y + p2.y) / 2;
+    float r = distance(p1, p2) / 2;
+
+    return {Point(x, y), r};
 }
 
 /**
@@ -98,12 +98,11 @@ Circle circle_from(const Point& p1, const Point& p2)
  * @param P     dataset of 2d points
  * @return      True if all points are inside the circle, false otherwise.
  */
-bool is_valid_circle(const Circle& c,
-                     const vector<Point>& P)
-{
+bool is_valid_circle(const Circle &c,
+                     const vector<Point> &P) {
     // Checks if there is a point that isn't inside the circle.
-    for (const Point& p : P)
-        if (!is_pt_in_circ(c, p))
+    for (const Point &point: P)
+        if (!is_pt_in_circ(c, point))
             return false;
     // If not found one, ret true.
     return true;
@@ -114,25 +113,25 @@ bool is_valid_circle(const Circle& c,
  * @param relevant_pts  max of 3 points
  * @return              smallest circle holding each one of the points.
  */
-Circle min_circle_simple(vector<Point>& relevant_pts)
-{
-    short pts_num = (short)relevant_pts.size();
+Circle min_circle_simple(vector<Point> &relevant_pts) {
+    short pts_num = (short) relevant_pts.size();
     // If no points intended, return default circle.
     if (pts_num == 0) {
-        return { { 0, 0 }, 0 };
+        Point p = {0, 0};
+        return {p, 0};
     }
-    // If one, return 0 sized circle around the point.
+        // If one, return 0 sized circle around the point.
     else if (pts_num == 1) {
-        return {relevant_pts[0], 0 };
+        return {relevant_pts[0], 0};
     }
-    // If 2, the smallest circle will be the one with 2 points on the diameter.
+        // If 2, the smallest circle will be the one with 2 points on the diameter.
     else if (pts_num == 2) {
         return circle_from(relevant_pts[0], relevant_pts[1]);
     }
     // If there are 3 points, the smallest circle could have 2 or 3 points
     // on the circle. Check each option for circle with 2 points on it.
-    for (int i = 0; i < MAX_RELEVANT_POINTS_NUMBER; i++) {
-        for (int j = i + 1; j < MAX_RELEVANT_POINTS_NUMBER; j++) {
+    for (int j = 0; j < MAX_RELEVANT_POINTS_NUMBER; j++) {
+        for (int i = j + 1; i < MAX_RELEVANT_POINTS_NUMBER; i++) {
             Circle c = circle_from(relevant_pts[i], relevant_pts[j]);
             if (is_valid_circle(c, relevant_pts))
                 return c;
@@ -152,8 +151,7 @@ Circle min_circle_simple(vector<Point>& relevant_pts)
  * @param n             number of points in point set that were not processed.
  * @return              MEC for the dataset pts_set.
  */
-Circle min_circ_recursive_helper(vector<Point>& pts_set, vector<Point> rlvnt_set, int n)
-{
+Circle min_circ_recursive_helper(vector<Point> &pts_set, vector<Point> rlvnt_set, int n) {
     // If all points are done, or there is no room for another relevant point,
     // so there is no way to keep going down the recursion, return min circle.
     if (n == 0 || rlvnt_set.size() == MAX_RELEVANT_POINTS_NUMBER) {
@@ -182,7 +180,7 @@ Circle min_circ_recursive_helper(vector<Point>& pts_set, vector<Point> rlvnt_set
  * @param size      size of dataset.
  * @return          The MEC for the dataset.
  */
-Circle findMinCircle(Point** points,size_t size){
+Circle findMinCircle(Point **points, size_t size) {
     //Copy array to vector.
     vector<Point> v = vector<Point>();
     for (int i = 0; i < size; ++i) {
@@ -194,4 +192,3 @@ Circle findMinCircle(Point** points,size_t size){
     //activate recursive helper method.
     return min_circ_recursive_helper(pts_set_cpy, {}, pts_set_cpy.size());
 }
-
