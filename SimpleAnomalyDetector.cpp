@@ -132,10 +132,10 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
  *
  * @param p1 - point
  * @param c - correlatedFeatures
- * @return the dev between the point and the
+ * @return the distance between the point and the
  *         linear reg of the correlatedFeatures
  ****************************************************/
 float SimpleAnomalyDetector::superDev(Point p1, correlatedFeatures c) {
 
-    return dev(p1, c.lin_reg);
+    return distance(p1, c.lin_reg);
 }

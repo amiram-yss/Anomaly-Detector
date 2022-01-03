@@ -136,28 +136,36 @@ Line linear_reg(Point **points, int size) {
  * @return the deviation between point p and the line equation of the points
  ********************************************************************************/
 float dev(Point p, Point **points, int size) {
-    return dev(p, linear_reg(points, size));
+    return distance(p, linear_reg(points, size));
 };
 
 /************************************************************
  *
- * @param p
- * @param l
+ * @param p - point
+ * @param l - line
  * @return the deviation between point p and the line
  ***********************************************************/
-float dev(Point p, Line l) {
+float distance(Point p, Line l) {
     float dev = fabsf(l.f(p.x) - p.y);
     return dev;
 }
 
 
+/*****************************************************************
+ *
+ * @param points - the array of points
+ * @param numOfPoints
+ * @param l - line
+ * @return The maximum distance between one of the
+ *         collection of points and the given line.
+ *****************************************************************/
 float maxDev(Point **points, int numOfPoints, Line l) {
 
     float theDev = 0;
     float maxDev = 0;
 
     for (int i = 0; i < numOfPoints; ++i) {
-        theDev = dev(*points[i], l);
+        theDev = distance(*points[i], l);
         if (theDev > maxDev) {
             maxDev = theDev;
         }
@@ -165,8 +173,14 @@ float maxDev(Point **points, int numOfPoints, Line l) {
     return maxDev;
 }
 
-
-float dev(Point p1, Point p2) {
+/****************************************************************
+ *
+ * Gets 2 points and calculates the distance between them.
+ * @param p1    point
+ * @param p2    point
+ * @return      distance [square root of |x1-x2|^2 to |y1-y2|^2]
+ *****************************************************************/
+float distance(Point p1, Point p2) {
     float dev = sqrt( pow(p1.x - p2.x,2) + pow(p1.y - p2.y,2) );
     return dev;
 }

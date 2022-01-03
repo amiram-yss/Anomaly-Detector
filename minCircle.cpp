@@ -6,20 +6,12 @@
  */
 
 #include "minCircle.h"
+#include "anomaly_detection_util.h"
 #include <vector>
 #include <cmath>
 
 using namespace std;
 
-/**
- * Gets 2 points and calculates the distance between them.
- * @param p1    point
- * @param p2    point
- * @return      distance [square root of |x1-x2|^2 to |y1-y2|^2]
- */
-float distance(const Point &p1, const Point &p2) {
-    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
-}
 
 /**
  * Is the point inside the given circle?

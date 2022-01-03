@@ -8,13 +8,9 @@
 
 #include "HybridAnomalyDetector.h"
 
-HybridAnomalyDetector::HybridAnomalyDetector() {
-    // TODO Auto-generated constructor stub
-}
+HybridAnomalyDetector::HybridAnomalyDetector() {}
 
-HybridAnomalyDetector::~HybridAnomalyDetector() {
-    // TODO Auto-generated destructor stub
-}
+HybridAnomalyDetector::~HybridAnomalyDetector() {}
 
 /******************************************************************************
  *
@@ -49,14 +45,14 @@ correlatedFeatures HybridAnomalyDetector::curr_with_reg_Shape(struct correlatedF
  *
  * @param p1 - point
  * @param c - correlatedFeatures
- * @return the dev between the point and the
+ * @return the distance between the point and the
  *         linear reg or the surrounding circle
  *         (depending on the corrlation).
  ****************************************************/
 float HybridAnomalyDetector::superDev(Point p1, correlatedFeatures c) {
 
     if (c.corrlation >= LINE_BRINK)
-        return dev(p1, c.lin_reg);
+        return distance(p1, c.lin_reg);
 
-    return dev(p1, c.circle_center);
+    return distance(p1, c.circle_center);
 }

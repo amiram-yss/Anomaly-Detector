@@ -50,10 +50,10 @@ Line linear_reg(Point **points, int size);
 float dev(Point p, Point **points, int size);
 
 // returns the deviation between point p and the line
-float dev(Point p, Line l);
+float distance(Point p, Line l);
 
 // returns the deviation between two points
-float dev(Point p1, Point p2);
+float distance(Point p1, Point p2);
 
 float maxDev(Point **points, int numOfPoints, Line l);
 
