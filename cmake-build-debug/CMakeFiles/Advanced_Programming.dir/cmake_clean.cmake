@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "Advanced_Programming"
   "Advanced_Programming.pdb"
+  "CMakeFiles/Advanced_Programming.dir/CLI.cpp.o"
   "CMakeFiles/Advanced_Programming.dir/HybridAnomalyDetector.cpp.o"
   "CMakeFiles/Advanced_Programming.dir/MainTrain.cpp.o"
   "CMakeFiles/Advanced_Programming.dir/SimpleAnomalyDetector.cpp.o"

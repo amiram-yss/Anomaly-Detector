@@ -34,7 +34,7 @@ struct correlatedFeatures {
 class SimpleAnomalyDetector : public TimeSeriesAnomalyDetector {
 private:
     vector<correlatedFeatures> cf;
-
+    float BRINK = 0.9;
 
 protected:
     correlatedFeatures collideTwoFeatures(const TimeSeries &ts, int i, int j);
@@ -50,6 +50,10 @@ public:
     virtual ~SimpleAnomalyDetector();
 
     virtual void learnNormal(const TimeSeries &ts);
+
+    void setBRINK(float f);
+
+    float getBRINK();
 
     virtual vector<AnomalyReport> detect(const TimeSeries &ts);
 

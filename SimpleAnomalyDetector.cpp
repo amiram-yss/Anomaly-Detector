@@ -12,6 +12,17 @@ SimpleAnomalyDetector::SimpleAnomalyDetector() {}
 
 SimpleAnomalyDetector::~SimpleAnomalyDetector() {}
 
+
+void SimpleAnomalyDetector::setBRINK(float f){
+    this->BRINK = f;
+}
+
+float SimpleAnomalyDetector::getBRINK(){
+    return this->BRINK;
+}
+
+
+
 /************************************************************************
  *
  * @param ts - the "TimeSeries"

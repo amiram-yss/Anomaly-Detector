@@ -85,6 +85,12 @@
 		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/AnomalyDetector.h">
 			<Option target="Advanced_Programming"/>
 		</Unit>
+		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/CLI.cpp">
+			<Option target="Advanced_Programming"/>
+		</Unit>
+		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/CLI.h">
+			<Option target="Advanced_Programming"/>
+		</Unit>
 		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/HybridAnomalyDetector.cpp">
 			<Option target="Advanced_Programming"/>
 		</Unit>
@@ -104,6 +110,9 @@
 			<Option target="Advanced_Programming"/>
 		</Unit>
 		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/anomaly_detection_util.h">
+			<Option target="Advanced_Programming"/>
+		</Unit>
+		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/commands.h">
 			<Option target="Advanced_Programming"/>
 		</Unit>
 		<Unit filename="/home/arielbarmats/CLionProjects/Advanced-Programming-1/minCircle.cpp">
