@@ -24,6 +24,10 @@ public:
     }
     virtual string read(){
 
+//        string s;
+//        cin>>s;
+//        return s;
+
         string s;
         in>>s;
         return s;
