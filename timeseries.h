@@ -5,65 +5,73 @@
  *         314985474 Amiram Yasif
  */
 
+
 #ifndef TIMESERIES_H_
 #define TIMESERIES_H_
-
+#include <iostream>
+#include <string.h>
+#include <fstream>
+#include<map>
 #include <vector>
-#include <string>
-#include <map>
+#include <string.h>
+#include <bits/stdc++.h>
+#include <algorithm>
 
 using namespace std;
 
-class TimeSeries {
-private:
+class TimeSeries{
 
-    map<string, int> criterion_index_map;
-    vector<float *> feature_guided_dataset, record_guided_dataset;
-    int records_count, features_count;
 
-    // Inits the data stracture
-    void initDataset(vector<string> &);
-
-    //switches line to float arr
-    float *lineToDoubleArray(string);
-
-    //Reads csv data
-    vector<string> GetCSVrawDataLines(const char *);
-
-    // creates list of the criteria string
-    void setCriteriaMap(string);
-
-    // creates matrix according to records
-    void setRecordGuidedDataset(vector<string> &);
-
-    // creates matrix according to features
-    void setFeaturesGuidedDataset();
-
-    // sets the dims of the experiment
-    void setDatasetDims(vector<string> &raw_dataset);
-
-    // allocates mem for the matrix
-    void initMatrixes();
-
+	map<string,vector<float>> ts;
+	vector<string> atts;
+	size_t dataRowSize;
 public:
-    // get num of features
-    int getColumnsNum() const;
 
-    // get num of records
-    int getRowsNum() const;
 
-    // get array of data in the i'th feature
-    float *getFeatureArray(int) const;
+	TimeSeries(const char* CSVfileName){
+		ifstream in(CSVfileName);
+		string head;
+		in>>head;
+		string att;
+		stringstream hss(head);
+		while(getline(hss,att,',')){
+			ts.emplace(att,vector<float>());
+		    atts.push_back(att);
+		}
 
-    // get array of data in the feature given as param
-    float *getFeatureArray(string) const;
+		while(!in.eof()){
+			string line;
+			in>>line;
+			string val;
+			stringstream lss(line);
+			int i=0;
+			while(getline(lss,val,',')){
+				ts[atts[i]].push_back(stof(val));
+			     i++;
+			}
+		}
+		in.close();
 
-    // get the name of the i'th feature
-    string getFeatureName(int) const;
+		dataRowSize = ts[atts[0]].size();
 
-    //constructor
-    TimeSeries(const char *CSVfileName);
+	}
+
+	const vector<float>& getAttributeData(string name)const{
+		return ts.at(name);
+	}
+
+	const vector<string>& gettAttributes()const{
+		return atts;
+	}
+
+	size_t getRowSize()const{
+		return dataRowSize;
+	}
+
+	~TimeSeries(){
+	}
 };
+
 
 
 #endif /* TIMESERIES_H_ */

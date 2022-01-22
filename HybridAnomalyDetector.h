@@ -5,7 +5,6 @@
  *         314985474 Amiram Yasif
  */
 
-
 #ifndef HYBRIDANOMALYDETECTOR_H_
 #define HYBRIDANOMALYDETECTOR_H_
 
@@ -17,9 +16,8 @@ public:
 	HybridAnomalyDetector();
 	virtual ~HybridAnomalyDetector();
 
-
-    float superDev(Point p1, correlatedFeatures c);
-    correlatedFeatures curr_with_reg_Shape(struct correlatedFeatures &theStruct, int rows, Point** ps);
+	virtual void learnHelper(const TimeSeries& ts,float p/*pearson*/,string f1, string f2,Point** ps);
+	virtual bool isAnomalous(float x, float y,correlatedFeatures c);
 };
 
 #endif /* HYBRIDANOMALYDETECTOR_H_ */

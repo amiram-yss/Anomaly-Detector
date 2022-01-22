@@ -6,62 +6,40 @@
  */
 
 #include "CLI.h"
-#include <string.h>
-#include <unistd.h>
-#include "commands.h"
-
-
 
 CLI::CLI(DefaultIO* dio) {
-    this->dio = dio;
-
-    //Placing the commands into the command vector
-    commands_vec.push_back(new uploadCSVfile (dio));
-    commands_vec.push_back(new algorithmSetting(dio));
-    commands_vec.push_back(new detectAnomalies(dio));
-    commands_vec.push_back(new displayResults(dio));
-    commands_vec.push_back(new upAnomAnalyze(dio));
-    commands_vec.push_back(new exitProgram(dio));
-
+		this->dio=dio;
+		commands.push_back(new UploadCSV(dio));
+		commands.push_back(new Settings(dio));
+		commands.push_back(new Detect(dio));
+		commands.push_back(new Results(dio));
+		commands.push_back(new UploadAnom(dio));
+		commands.push_back(new Exit(dio));
 }
 
 void CLI::start(){
-
-    status myStatus;
-    string input;
-    int choice = 0;
-
-    while (choice != 6 ) {
-
-        dio->write("Welcome to the Anomaly Detection Server.\n");
-        dio->write("Please choose an option:\n");
-
-        dio->write("1." + commands_vec[0]->getDescription() + "\n");
-        dio->write("2." + commands_vec[1]->getDescription()+ "\n");
-        dio->write("3." + commands_vec[2]->getDescription() + "\n");
-        dio->write("4." + commands_vec[3]->getDescription() + "\n");
-        dio->write("5." + commands_vec[4]->getDescription() + "\n");
-        dio->write("6." + commands_vec[5]->getDescription() + "\n");
-
-        input = dio->read();
-        choice = input[0] - '0';
-
-        if (choice >= 1 && choice <= 6) {
-            commands_vec[choice - 1]->execute(&myStatus);
-        }
-    }
-
-
-
-
-
-
+	SharedState sharedState;
+	int index=-1;
+	while(index!=5){
+		dio->write("Welcome to the Anomaly Detection Server.\n");
+		dio->write("Please choose an option:\n");
+		for(size_t i=0;i<commands.size();i++){
+			string s("1.");
+			s[0]=((char)(i+1+'0'));
+			dio->write(s);
+			dio->write(commands[i]->description+"\n");
+		}
+		string input = dio->read();
+		index=input[0]-'0'-1;
+		if(index>=0 && index<=6)
+			commands[index]->execute(&sharedState);
+	}
 }
 
 
 CLI::~CLI() {
-    for (int j = 0; j < commands_vec.size(); ++j) {
-        delete commands_vec[j];
-    }
+	for(size_t i=0;i<commands.size();i++){
+		delete commands[i];
+	}
 }
 
