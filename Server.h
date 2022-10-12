@@ -5,8 +5,7 @@
  *         314985474 Amiram Yasif
  */
 
-#ifndef SERVER_H_
-#define SERVER_H_
+#pragma once
 
 #include <iostream>
 #include <sys/socket.h>  // The header file socket.h includes a number of definitions of structures needed for sockets.
@@ -28,57 +27,60 @@ using namespace std;
 
 // edit your ClientHandler interface here:
 class ClientHandler{
-    public:
+public:
     virtual void handle(int clientID)=0;
 };
 
 // you can add helper classes
 
 class socketIO:public DefaultIO{
-	int clientID;
+    int clientID;
 public:
 
-	socketIO(int clientID):clientID(clientID){}
+    socketIO(int clientID):clientID(clientID){}
 
-	virtual string read();
-	virtual void write(string text);
+    virtual string read();
+    virtual void write(string text);
 
-	virtual void write(float f);
+    virtual void write(float f);
 
-	virtual void read(float* f);
+    virtual void read(float* f);
 
 };
 
 
 // edit your AnomalyDetectionHandler class here
 class AnomalyDetectionHandler:public ClientHandler{
-	public:
+public:
     virtual void handle(int clientID){
-    	socketIO sio(clientID);
-    	CLI cli(&sio);
-    	cli.start();
+        socketIO sio(clientID);
+        CLI cli(&sio);
+        cli.start();
     }
 };
 
 
-// implement on Server.cpp
+/**
+ * implement on Server.cpp
+ * Server shuts down in 2 seconds.
+ */
+
 class Server {
-	// you may add data members
-	int fd;
-	sockaddr_in server;
-	sockaddr_in client;
+    // you may add data members
+    int fd;
+    sockaddr_in server;
+    sockaddr_in client;
+    pid_t server_pid;
 
-	thread* serverListenerThread;
+    thread* serverListenerThread;
 
-	volatile bool isRunning;
+    volatile bool isRunning;
 
 public:
-	Server(int port) throw (const char*);
-	virtual ~Server();
+    Server(int port) throw (const char*);
+    virtual ~Server();
 
-	void start(ClientHandler& ch)throw(const char*);
+    pid_t start(ClientHandler& ch)throw(const char*);
 
-	void stop();
+    void stop();
 };
-
-#endif /* SERVER_H_ */

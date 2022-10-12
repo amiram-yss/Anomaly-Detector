@@ -5,51 +5,63 @@
  *         314985474 Amiram Yasif
  */
 
-
 #ifndef SIMPLEANOMALYDETECTOR_H_
 #define SIMPLEANOMALYDETECTOR_H_
 
+#define ELIMINATES_FALSE_ALARMS 1.1f
+#define LINE_BRINK 0.9f //columns pearsons above it correlated to line
+#define MIN_BRINK 0.5f //only pearsons above it will consider
+#define HYPHEN "-"
+
+
 #include "anomaly_detection_util.h"
 #include "AnomalyDetector.h"
+#include "minCircle.h"
 #include <vector>
 #include <algorithm>
-#include <string.h>
-#include <math.h>
+#include <string>
+#include <cmath>
 
-struct correlatedFeatures{
-	string feature1,feature2;  // names of the correlated features
-	float corrlation;
-	Line lin_reg;
-	float threshold;
-	float cx,cy;
+struct correlatedFeatures {
+    string feature1, feature2;  // names of the correlated features
+    float corrlation;
+    Line lin_reg;
+    Point circle_center;
+    float threshold;
 };
 
 
-class SimpleAnomalyDetector:public TimeSeriesAnomalyDetector{
+class SimpleAnomalyDetector : public TimeSeriesAnomalyDetector {
+private:
+    vector<correlatedFeatures> cf;
+    float BRINK = 0.9;
+
 protected:
-	vector<correlatedFeatures> cf;
-	float threshold;
+    correlatedFeatures collideTwoFeatures(const TimeSeries &ts, int i, int j);
+
+    virtual float superDev(Point p1, correlatedFeatures c);
+
+    virtual correlatedFeatures curr_with_reg_Shape(struct correlatedFeatures &theStruct, int rows, Point **ps);
+
+
 public:
-	SimpleAnomalyDetector();
-	virtual ~SimpleAnomalyDetector();
+    SimpleAnomalyDetector();
 
-	virtual void learnNormal(const TimeSeries& ts);
-	virtual vector<AnomalyReport> detect(const TimeSeries& ts);
-	vector<correlatedFeatures> getNormalModel(){
-		return cf;
-	}
-	void setCorrelationThreshold(float threshold){
-		this->threshold=threshold;
-	}
+    virtual ~SimpleAnomalyDetector();
 
-	// helper methods
-protected:
-	virtual void learnHelper(const TimeSeries& ts,float p/*pearson*/,string f1, string f2,Point** ps);
-	virtual bool isAnomalous(float x, float y,correlatedFeatures c);
-	Point** toPoints(vector<float> x, vector<float> y);
-	float findThreshold(Point** ps,size_t len,Line rl);
+    virtual void learnNormal(const TimeSeries &ts);
+
+    void setBRINK(float f);
+
+    float getBRINK();
+
+    virtual vector<AnomalyReport> detect(const TimeSeries &ts);
+
+    vector<correlatedFeatures> getNormalModel() {
+        return cf;
+    }
+
 };
-
 
 
 #endif /* SIMPLEANOMALYDETECTOR_H_ */

@@ -8,132 +8,130 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug"/>
+				<Option working_dir="/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug"/>
-				<Option type="4"/>
+			<Target title="Advanced_Programming">
+				<Option output="/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Advanced_Programming" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/System/Library/Frameworks"/>
+				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 Advanced_Programming"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Advanced_Programming/fast">
+				<Option output="/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Advanced_Programming" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/System/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 Advanced_Programming/fast"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug"/>
+				<Option working_dir="/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Advanced_Programming_1">
-				<Option output="/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Advanced_Programming_1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug"/>
+				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Advanced_Programming_1"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Advanced_Programming_1/fast">
-				<Option output="/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Advanced_Programming_1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Advanced_Programming_1/fast"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/amiram/CLionProjects/Advanced-Programming-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/Users/amiramyass/CLionProjects/Anomaly-Detector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/AnomalyDetector.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/AnomalyDetector.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/CLI.cpp">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/CLI.cpp">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/CLI.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/CLI.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/HybridAnomalyDetector.cpp">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/HybridAnomalyDetector.cpp">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/HybridAnomalyDetector.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/HybridAnomalyDetector.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/MainTrain.cpp">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/MainTrain.cpp">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/Server.cpp">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/Server.cpp">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/Server.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/Server.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/SimpleAnomalyDetector.cpp">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/SimpleAnomalyDetector.cpp">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/SimpleAnomalyDetector.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/SimpleAnomalyDetector.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/anomaly_detection_util.cpp">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/anomaly_detection_util.cpp">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/anomaly_detection_util.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/anomaly_detection_util.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/commands.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/commands.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/minCircle.cpp">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/minCircle.cpp">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/minCircle.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/minCircle.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/timeseries.cpp">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/timeseries.cpp">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/timeseries.h">
-			<Option target="Advanced_Programming_1"/>
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/timeseries.h">
+			<Option target="Advanced_Programming"/>
 		</Unit>
-		<Unit filename="/home/amiram/CLionProjects/Advanced-Programming-1/CMakeLists.txt">
+		<Unit filename="/Users/amiramyass/CLionProjects/Anomaly-Detector/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
