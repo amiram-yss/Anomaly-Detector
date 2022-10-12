@@ -90,7 +90,7 @@ pid_t Server::start(ClientHandler& ch) throw (const char*){
 
         while (isRunning) {
             socklen_t clientSize = sizeof(client);
-            alarm(2000);//
+            alarm(5);//
             struct timeval timeout;
             /*timeout.tv_sec = 2;
             timeout.tv_usec = 0;
